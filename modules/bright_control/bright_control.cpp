@@ -4,8 +4,9 @@
     Este archivo de codigo modifica la intensidad de los 3 leds del LED RGB (Red, Green and Blue) para
     obtener así distintas combinaciones logrando diferentes colores. Esto se logra mediante el uso de
     señales PWM generadas a partir de interrupciones por un ticker al cual se le configura una determinada
-    frecuencia. Modificando el Duty Cycle de las señales PWM se logran diferentes intensidades (cuanto mayor
-    es el tiempo en ON del PWM, entonces mayor será el brillo en el led).
+    frecuencia (todo esto lo hace mediante la funcion tickerCallbackBrightControl, que es la que termina 
+    generando la forma del PWM). Modificando el Duty Cycle de las señales PWM se logran diferentes 
+    intensidades (cuanto mayor es el tiempo en ON del PWM, entonces mayor será el brillo en el led).
     
     Arbol de funciones:
     brightControlInit()
@@ -60,7 +61,7 @@ static void tickerCallbackBrightControl( );
 void brightControlInit()
 {
     tickerBrightControl.attach( tickerCallbackBrightControl, 
-                              ( (float) tickRateMSBrightControl) / 1000.0 );
+                              ( (float) tickRateMSBrightControl) / 1000.0 ); //Asocia el ticker con la funcion tickerCallbackBrightControl cada determinado tiempo.
 
     setPeriod( RGB_LED_RED, 0.01f );
     setPeriod( RGB_LED_GREEN, 0.01f );
